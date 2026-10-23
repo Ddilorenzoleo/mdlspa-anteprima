@@ -102,6 +102,9 @@
 	.mdl-action-bar a { font-family: var(--wp--preset--font-family--display); font-size: 0.8125rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 500; }
 	.mdl-action-bar a.mdl-primary { background: var(--wp--preset--color--ink); color: var(--wp--preset--color--white); }
 	body { padding-bottom: 56px; }
+	/* menu aperto: la barra (z-index 60) stava sopra il menu e copriva l'ultima voce, Azienda */
+	html.has-modal-open .mdl-action-bar { display: none; }
+	.wp-block-navigation__responsive-container.is-menu-open { padding-bottom: 32px; }
 }
 
 /* --- intestazione di sezione: titolo a sinistra, testo/azione a destra -------- */
@@ -420,7 +423,12 @@ main.wp-block-group > .wp-block-post-content > * { margin-block-start: 0; }
 .mdl-hero-split.mdl-hero-inner > .mdl-hero-img-natural { flex: 0 0 auto !important; max-width: none !important; }
 .mdl-hero-split.mdl-hero-inner > .mdl-w58 { width: 58% !important; }
 .mdl-hero-split.mdl-hero-inner > .mdl-w42 { width: 42% !important; }
-@media (max-width: 781px) { .mdl-hero-split.mdl-hero-inner > .mdl-hero-img-natural { width: 100% !important; } }
+@media (max-width: 781px) {
+	.mdl-hero-split.mdl-hero-inner > .mdl-hero-img-natural { width: 100% !important; }
+	/* il riquadro 896/1196 e' quello della foto verticale della Home: nelle pagine interne la foto
+	   tiene le sue proporzioni, altrimenti sotto una foto orizzontale resta un vuoto (Assistenza, 23/10) */
+	.mdl-hero-inner .mdl-hero-img { aspect-ratio: auto; min-width: 0; }
+}
 .mdl-hero-inner .mdl-hero-img img { height: auto !important; max-height: 88vh; object-fit: initial !important; }
 .mdl-hero-inner .mdl-crumbs { color: var(--wp--preset--color--mist); }
 .mdl-hero-inner .mdl-crumbs a { color: inherit; }
